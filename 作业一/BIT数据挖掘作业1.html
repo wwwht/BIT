@@ -1,0 +1,215 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BIT数据挖掘作业1</title>
+  <link rel="stylesheet" href="https://stackedit.io/style.css" />
+</head>
+
+<body class="stackedit">
+  <div class="stackedit__html"><p></p><div class="toc"><h3>文章目录</h3><ul><li><a href="#Wine_Reviews_4">Wine Reviews</a></li><ul><li><a href="#1__5">1. 数据可视化和摘要</a></li><ul><li><a href="#11__6">1.1 数据集</a></li><li><a href="#12__23">1.2 数据摘要</a></li><li><a href="#13__43">1.3 数据可视化</a></li></ul><li><a href="#2__49">2. 数据缺失的处理</a></li></ul><li><a href="#Consumer__Visitor_Insights_For_Neighborhoods_54">Consumer &amp; Visitor Insights For Neighborhoods</a></li><ul><li><a href="#1__56">1. 数据可视化和摘要</a></li><ul><li><a href="#11__58">1.1 数据集</a></li><li><a href="#12__75">1.2 数据摘要和可视化：</a></li></ul><li><a href="#2__86">2. 数据缺失的处理</a></li></ul></ul></div><br>
+王浩天<br>
+3220180738<p></p>
+<h1><a id="Wine_Reviews_4"></a>Wine Reviews</h1>
+<h2><a id="1__5"></a>1. 数据可视化和摘要</h2>
+<h3><a id="11__6"></a>1.1 数据集</h3>
+
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>列名</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A</td>
+<td>country</td>
+<td>The country that the wine is from</td>
+</tr>
+<tr>
+<td>A</td>
+<td>description</td>
+<td>The country that the wine is from</td>
+</tr>
+<tr>
+<td>A</td>
+<td>designation</td>
+<td>The vineyard within the winery where the grapes that made the wine are from</td>
+</tr>
+<tr>
+<td>#</td>
+<td>points</td>
+<td>The number of points WineEnthusiast rated the wine on a scale of 1-100 (though they say they only post reviews for wines that score &gt;=80)</td>
+</tr>
+<tr>
+<td>#</td>
+<td>price</td>
+<td>The cost for a bottle of the wine</td>
+</tr>
+<tr>
+<td>A</td>
+<td>province</td>
+<td>The province or state that the wine is from</td>
+</tr>
+<tr>
+<td>A</td>
+<td>region_1</td>
+<td>The wine growing area in a province or state (ie Napa)</td>
+</tr>
+<tr>
+<td>A</td>
+<td>region_2</td>
+<td>Sometimes there are more specific regions specified within a wine growing area (ie Rutherford inside the Napa Valley), but this value can sometimes be blank</td>
+</tr>
+<tr>
+<td>A</td>
+<td>taster_name</td>
+<td>品酒师姓名</td>
+</tr>
+<tr>
+<td>A</td>
+<td>taster_twitter_handle</td>
+<td></td>
+</tr>
+<tr>
+<td>A</td>
+<td>title</td>
+<td>The title of the wine review, which often contains the vintage if you’re interested in extracting that feature</td>
+</tr>
+<tr>
+<td>A</td>
+<td>variety</td>
+<td>The type of grapes used to make the wine (ie Pinot Noir)</td>
+</tr>
+<tr>
+<td>A</td>
+<td>winery</td>
+<td>The winery that made the wine</td>
+</tr>
+</tbody>
+</table><h3><a id="12__23"></a>1.2 数据摘要</h3>
+<p>标称属性：country, province, taster_name,taster_twitter_handle, title, variety, winery, region_1, region_2<br>
+数值属性：points，price<br>
+<img src="https://img-blog.csdnimg.cn/20190329211350485.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L05PRElFQ0FORkxZ,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>
+标称属性统计：<br>
+国家区域频数统计（部分，完整见附件，下同）<br>
+<img src="https://img-blog.csdnimg.cn/20190326193950344.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L05PRElFQ0FORkxZ,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>
+品酒师及其twitter统计：可以看到空缺值Null有很多，说明有很多红酒的品酒师和得分不详<br>
+<img src="https://img-blog.csdnimg.cn/20190326195345260.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L05PRElFQ0FORkxZ,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>
+红酒品种统计：按从高到低的次序<br>
+<img src="https://img-blog.csdnimg.cn/2019032721142415.png" alt="在这里插入图片描述"><br>
+红酒庄园分类：<br>
+<img src="https://img-blog.csdnimg.cn/20190327221809521.png" alt="在这里插入图片描述"><br>
+对数值属性 points 和price绘制盒图：</p>
+<p><img src="https://img-blog.csdnimg.cn/20190328162931394.png" alt="在这里插入图片描述"><br>
+可以看到大部分数据还是集中在17-42之间的</p>
+<p>红酒分数盒图：因为分数完全分布在80-100之间<br>
+<img src="https://img-blog.csdnimg.cn/20190328163949411.png" alt="在这里插入图片描述"></p>
+<h3><a id="13__43"></a>1.3 数据可视化</h3>
+<p>针对数值属性<br>
+<img src="https://img-blog.csdnimg.cn/20190328183549974.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L05PRElFQ0FORkxZ,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>
+<img src="https://img-blog.csdnimg.cn/2019032818361340.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L05PRElFQ0FORkxZ,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>
+下面是qq图：可见附件<br>
+<img src="https://img-blog.csdnimg.cn/20190328203208778.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L05PRElFQ0FORkxZ,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h2><a id="2__49"></a>2. 数据缺失的处理</h2>
+<p>详细请见 Wine_data_processing.ipynb</p>
+<p><img src="https://img-blog.csdnimg.cn/20190329221350541.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L05PRElFQ0FORkxZ,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h1><a id="Consumer__Visitor_Insights_For_Neighborhoods_54"></a>Consumer &amp; Visitor Insights For Neighborhoods</h1>
+<h2><a id="1__56"></a>1. 数据可视化和摘要</h2>
+<h3><a id="11__58"></a>1.1 数据集</h3>
+
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>列名</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>census_block_group</td>
+<td>String</td>
+<td>Census Block Group独特的12位FIPS代码。请注意，一些CBG具有前导零</td>
+</tr>
+<tr>
+<td>date_range_start：</td>
+<td>Long</td>
+<td>测量周期的开始时间为UTC秒的时间戳。</td>
+</tr>
+<tr>
+<td>date_range_end：</td>
+<td>Long</td>
+<td>测量周期的结束时间作为UTC秒的时间戳。</td>
+</tr>
+<tr>
+<td>raw_visit_count：</td>
+<td>Integer</td>
+<td>在日期范围内，我们的小组对此CBG的访问次数。</td>
+</tr>
+<tr>
+<td>raw_visitor_count：</td>
+<td>Integer</td>
+<td>在日期范围内，我们的小组看到此POI的唯一身份访问者数量。</td>
+</tr>
+<tr>
+<td>visitor_home_cbgs：</td>
+<td>{String:Int}</td>
+<td>某个社区观察到的访问人数</td>
+</tr>
+<tr>
+<td>visitor_work_cbgs：</td>
+<td>{String:Int}</td>
+<td>访问某个CBG的</td>
+</tr>
+<tr>
+<td>distance_from_home：</td>
+<td>Integer</td>
+<td>访客到家的距离</td>
+</tr>
+<tr>
+<td>related_same_day_brand：</td>
+<td>Array</td>
+<td>此CBG的参观者在访问CBG的同一天访问的品牌，其中客户重叠与SafeGraph全国平均值相比至少相差5％。</td>
+</tr>
+<tr>
+<td>related_same_month_brand：</td>
+<td>Array</td>
+<td>此CBG的访客在访问CBG的同一个月访问过的品牌，其中客户重叠与SafeGraph全国平均值相差至少5％。</td>
+</tr>
+<tr>
+<td>top_brands：</td>
+<td>Array</td>
+<td>，在此期间，CBG中访问过的顶级品牌列表。仅限十大品牌。</td>
+</tr>
+<tr>
+<td>popularity_by_hour：</td>
+<td>Array</td>
+<td>在当地时间的日期范围内，将当天的小时数与每小时的访问次数映射。</td>
+</tr>
+<tr>
+<td>popularity_by_day：</td>
+<td>Array</td>
+<td>在日期范围内，每周的日期映射到每天（当地时间）的访问次数。</td>
+</tr>
+</tbody>
+</table><h3><a id="12__75"></a>1.2 数据摘要和可视化：</h3>
+<p>标称属性：census_block_group，用来区分不同的CBG，由于每个CBG都有唯一的一个FIPS，所以每个可能取值的频数为1<br>
+数值属性：raw_visit_count, raw_visitor_count<br>
+下面是对数值属性的直方图和盒图：<br>
+其中 raw_visit_count有106个null，raw_visitor_count有<br>
+<img src="https://img-blog.csdnimg.cn/20190329211948355.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L05PRElFQ0FORkxZ,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>
+<img src="https://img-blog.csdnimg.cn/20190329212138266.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L05PRElFQ0FORkxZ,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>
+raw_visitor_count：<br>
+<img src="https://img-blog.csdnimg.cn/20190329213205783.png" alt="在这里插入图片描述"><br>
+<img src="https://img-blog.csdnimg.cn/20190329212316163.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L05PRElFQ0FORkxZ,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h2><a id="2__86"></a>2. 数据缺失的处理</h2>
+<p><img src="https://img-blog.csdnimg.cn/20190329220506961.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L05PRElFQ0FORkxZ,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+</div>
+</body>
+
+</html>
